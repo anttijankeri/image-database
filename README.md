@@ -1,6 +1,8 @@
 # image-database
 
-This project is supposed to save and respond with images to the user. It should have a username/password authentication to access your own images. The images should also be groupable together, with each image being able to be in more than one group. Each group or image should also have a text associated with it. It should also allow directly linking to a single image or group without authentication, if the user has allowed it. The language used is Typescript.
+This project is supposed to save and send objects with linked images and text values for the user. Objects should be creatable without any accompanying data if needed (besides name.) Each object should be retrievable as its own unit, with all the accompanying data. The text/other values should be configurable based on the database needs. The user should also be able to search/filter objects based on those values. The user's objects should be locked behind authentication (cookie-based sessions.) The user should also have the choice of exposing an object or image to others. Objects should also be groupable together.
+
+This repo uses **Typescript**
 
 ## TODO
 
