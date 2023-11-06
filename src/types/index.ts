@@ -14,16 +14,19 @@ type DateData = Date;
 
 type DateArray = DateData[];
 
+type ImageFile = File;
+
 type ImageData = {
-  imageLink: string;
-  shared: boolean;
+  imageFile?: ImageFile;
+  imageLink: StringData;
+  shared: BooleanData;
 };
 
 type ImageArray = ImageData[];
 
 type DiaryEvent = {
-  date: Date;
-  note: string;
+  date: DateData;
+  note: StringData;
 };
 
 type DiaryArray = DiaryEvent[];
