@@ -6,6 +6,10 @@ type BooleanData = boolean;
 
 type BooleanArray = BooleanData[];
 
+type NumberData = number;
+
+type NumberArray = NumberData[];
+
 type DateData = Date;
 
 type DateArray = DateData[];
@@ -29,6 +33,8 @@ export {
   StringArray,
   BooleanData,
   BooleanArray,
+  NumberData,
+  NumberArray,
   DateData,
   DateArray,
   ImageData,
