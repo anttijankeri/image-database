@@ -16,8 +16,10 @@ type DateArray = DateData[];
 
 type ImageFile = File;
 
+type Optional = undefined;
+
 type ImageData = {
-  imageFile?: ImageFile;
+  imageFile: ImageFile | Optional;
   imageLink: StringData;
   shared: BooleanData;
 };
@@ -44,4 +46,5 @@ export {
   ImageArray,
   DiaryEvent,
   DiaryArray,
+  Optional,
 };
