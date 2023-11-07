@@ -1,15 +1,7 @@
-// import * as dataTypes from "./index";
-// import DataObject from "../config";
-// import z from "zod";
+import { DataObject, DataObjectSchema } from "../config";
 
-// const stringSchema = z.string();
+const validateData = (data: DataObject) => {
+  return DataObjectSchema.safeParse(data).success;
+};
 
-// const booleanSchema = z.boolean();
-
-// const numberSchema = z.number();
-
-// const dateSchema = z.date();
-
-// const optionalSchema = z.optional();
-
-// const dataObjectSchema = z.object(DataObject);
+export default validateData;

@@ -1,8 +1,12 @@
-import * as dataTypes from "./types/";
+import * as dataTypes from "./data_types";
 import z from "zod";
 
-const DataObject = z
+export const DataObjectSchema = z
   .object({
+    // ADD YOUR OWN DATA TYPES HERE
+    // USE TYPES IN DATA_TYPES/INDEX.TS
+    // -----------------------------------
+
     genusName: dataTypes.StringData,
     speciesName: dataTypes.StringData,
     commonName: dataTypes.StringData,
@@ -26,7 +30,10 @@ const DataObject = z
     images: dataTypes.ImageArray,
     events: dataTypes.DiaryArray,
     shared: dataTypes.BooleanArray,
+
+    // -----------------------------------
+    // ^^^^ DATATYPES ABOVE THIS LINE ^^^^
   })
   .strict();
 
-export default DataObject;
+export type DataObject = z.infer<typeof DataObjectSchema>;
