@@ -5,6 +5,7 @@ export const DataObjectSchema = z
   .object({
     // ADD YOUR OWN DATA TYPES HERE
     // USE TYPES IN DATA_TYPES/INDEX.TS
+    // VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVvV
     // -----------------------------------
 
     genusName: dataTypes.StringData,

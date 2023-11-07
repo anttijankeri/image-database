@@ -26,14 +26,11 @@ const ACCEPTED_IMAGE_TYPES = [
 
 const ImageFile = z
   .any()
-  .refine((files) => files?.length === 0, "Image is required.") // if no file files?.length === 0, if file files?.length === 1
+  .refine((file) => file?.length === 0, "Image is required.")
+  .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB.`)
   .refine(
-    (files) => files?.[0]?.size >= MAX_FILE_SIZE,
-    `Max file size is 50MB.`
-  ) // this should be greater than or equals (>=) not less that or equals (<=)
-  .refine(
-    (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
-    ".jpg, .jpeg, .png and .webp files are accepted."
+    (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+    "Only .jpg, .jpeg, .png and .webp formats are supported."
   );
 
 const ImageData = z.object({

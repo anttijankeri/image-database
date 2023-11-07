@@ -5,8 +5,8 @@ import objects from "./objects";
 
 const router = express.Router();
 
-router.use(auth);
-router.use(users);
-router.use(objects);
+router.use("/auth", auth);
+router.use("/users", users);
+router.use("/objects", objects);
 
 export default router;
