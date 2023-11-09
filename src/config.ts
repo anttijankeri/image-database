@@ -28,9 +28,9 @@ export const DataObjectSchema = z
     dateLastFlower: dataTypes.DateData,
     dateRemoved: dataTypes.DateData,
 
-    images: dataTypes.ImageArray,
-    events: dataTypes.DiaryArray,
-    shared: dataTypes.BooleanArray,
+    images: dataTypes.ImageDataArray,
+    events: dataTypes.DiaryDataArray,
+    shared: dataTypes.BooleanDataArray,
 
     // -----------------------------------
     // ^^^^ DATATYPES ABOVE THIS LINE ^^^^

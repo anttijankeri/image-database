@@ -2,19 +2,19 @@ import z from "zod";
 
 const StringData = z.string();
 
-const StringArray = z.string().array();
+const StringDataArray = z.string().array();
 
 const BooleanData = z.boolean();
 
-const BooleanArray = z.boolean().array();
+const BooleanDataArray = z.boolean().array();
 
 const NumberData = z.number();
 
-const NumberArray = z.number().array();
+const NumberDataArray = z.number().array();
 
 const DateData = z.date();
 
-const DateArray = z.date().array();
+const DateDataArray = z.date().array();
 
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = [
@@ -39,26 +39,26 @@ const ImageData = z.object({
   shared: BooleanData,
 });
 
-const ImageArray = ImageData.array();
+const ImageDataArray = ImageData.array();
 
 const DiaryEvent = z.object({
   date: DateData,
   note: StringData,
 });
 
-const DiaryArray = DiaryEvent.array();
+const DiaryDataArray = DiaryEvent.array();
 
 export {
   StringData,
-  StringArray,
+  StringDataArray,
   BooleanData,
-  BooleanArray,
+  BooleanDataArray,
   NumberData,
-  NumberArray,
+  NumberDataArray,
   DateData,
-  DateArray,
+  DateDataArray,
   ImageData,
-  ImageArray,
+  ImageDataArray,
   DiaryEvent,
-  DiaryArray,
+  DiaryDataArray,
 };
