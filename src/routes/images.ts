@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
 
     const filePath = path.resolve(path.join("data", randomUUID() + fileFormat));
 
-    await writeFile(filePath, file, { encoding: "binary" });
+    await writeFile(filePath, file, { encoding: "base64" });
     res.status(201).json({ filePath });
   } catch (error) {
     console.log(error);
