@@ -3,6 +3,7 @@ import fileUpload from "express-fileupload";
 import express from "express";
 import path from "path";
 import { writeFile } from "fs/promises";
+import checkCreateFolder from "../utils/checkCreateFolder";
 
 const router = express.Router();
 
@@ -15,18 +16,25 @@ router.get("/:id", async (_req, res) => {
 router.post("/", async (req, res) => {
   try {
     const file = req.body.file;
-    const fileFormat = req.body.fileFormat;
-    if (!file) {
-      throw new Error("Missing file");
+    const folder = req.body.folder;
+    const format = req.body.format;
+
+    if (!file || !folder || !format) {
+      throw new Error("Missing file/folder/format");
     }
 
-    const filePath = path.resolve(path.join("data", randomUUID() + fileFormat));
+    if (!(await checkCreateFolder(path.resolve("data", folder)))) {
+      throw new Error("Cant access user folder");
+    }
+
+    const filePath = path.resolve(
+      path.join("data", folder, randomUUID() + format)
+    );
 
     await writeFile(filePath, file, { encoding: "base64" });
     res.status(201).json({ filePath });
   } catch (error) {
-    console.log(error);
-    res.status(500).send("Failed to save file");
+    res.status(500).send((error as Error).message);
   }
 });
 
