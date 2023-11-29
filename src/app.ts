@@ -25,7 +25,7 @@ const errorHandler = (
     return next(err);
   }
   res.status(500);
-  res.render("error", { error: err });
+  res.json({ error: err });
 };
 
 app.use(errorHandler);
