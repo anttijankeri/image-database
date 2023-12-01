@@ -10,7 +10,11 @@ const router = express.Router();
 router.use(fileUpload());
 
 router.get("/:id", async (_req, res, next) => {
-  res.send("COOL GET");
+  try {
+    res.send("COOL GET");
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.post("/", async (req, res, next) => {
@@ -39,7 +43,11 @@ router.post("/", async (req, res, next) => {
 });
 
 router.delete("/:id", async (_req, res, next) => {
-  res.send("COOL DELETE");
+  try {
+    res.send("COOL DELETE");
+  } catch (error) {
+    next(error);
+  }
 });
 
 export default router;
