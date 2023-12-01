@@ -24,8 +24,7 @@ const errorHandler = (
   if (res.headersSent) {
     return next(err);
   }
-  res.status(500);
-  res.json({ error: err });
+  res.status(500).json({ error: err });
 };
 
 app.use(errorHandler);

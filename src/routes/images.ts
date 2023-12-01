@@ -9,11 +9,11 @@ const router = express.Router();
 
 router.use(fileUpload());
 
-router.get("/:id", async (_req, res) => {
+router.get("/:id", async (_req, res, next) => {
   res.send("COOL GET");
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
     const file = req.body.file;
     const folder = req.body.folder;
@@ -34,11 +34,11 @@ router.post("/", async (req, res) => {
     await writeFile(filePath, file, { encoding: "base64" });
     res.status(201).json({ filePath });
   } catch (error) {
-    res.status(500).send((error as Error).message);
+    next(error);
   }
 });
 
-router.delete("/:id", async (_req, res) => {
+router.delete("/:id", async (_req, res, next) => {
   res.send("COOL DELETE");
 });
 
