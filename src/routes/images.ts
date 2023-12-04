@@ -1,8 +1,7 @@
 import { randomUUID } from "crypto";
-import fileUpload from "express-fileupload";
+import fileUpload, { UploadedFile } from "express-fileupload";
 import express from "express";
 import path from "path";
-import { writeFile } from "fs/promises";
 import checkCreateFolder from "../utils/checkCreateFolder";
 
 const router = express.Router();
@@ -19,7 +18,7 @@ router.get("/:id", async (_req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const file = req.body.file;
+    const file = req.files?.file as UploadedFile;
     const folder = req.body.folder;
     const format = req.body.format;
 
@@ -35,7 +34,7 @@ router.post("/", async (req, res, next) => {
       path.join("data", folder, randomUUID() + format)
     );
 
-    await writeFile(filePath, file, { encoding: "base64" });
+    await file.mv(filePath);
     res.status(201).json({ filePath });
   } catch (error) {
     next(error);
