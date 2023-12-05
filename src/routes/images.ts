@@ -12,7 +12,11 @@ router.use(fileUpload());
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const filePath = path.resolve("data", req.headers.filePath as string);
+    const filePath = path.resolve(
+      "data",
+      req.headers.userFolder as string,
+      req.headers.fileName as string
+    );
     const stream = createReadStream(filePath);
     stream.pipe(res);
     stream.on("end", () =>
@@ -42,11 +46,11 @@ router.post("/", async (req, res, next) => {
       throw new Error("Cant access user folder");
     }
 
-    const filePath = path.join(folder, randomUUID() + format);
-    const realFilePath = path.resolve("data", filePath);
+    const fileName = randomUUID() + format;
+    const filePath = path.resolve("data", folder, fileName);
 
-    await file.mv(realFilePath);
-    res.status(201).json({ filePath });
+    await file.mv(filePath);
+    res.status(201).json({ fileName });
   } catch (error) {
     next(error);
   }
@@ -54,10 +58,14 @@ router.post("/", async (req, res, next) => {
 
 router.delete("/:id", async (req, res, next) => {
   try {
-    const filePath = req.headers.filePath as string;
-    const realFilePath = path.resolve("data", filePath);
-    await fs.unlink(realFilePath);
-    res.json({ filePath });
+    const fileName = req.headers.fileName as string;
+    const filePath = path.resolve(
+      "data",
+      req.headers.userFolder as string,
+      fileName
+    );
+    await fs.unlink(filePath);
+    res.json({ fileName });
   } catch (error) {
     next(error);
   }
