@@ -10,23 +10,25 @@ const router = express.Router();
 
 router.use(fileUpload());
 
-router.get("/:id", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const filePath = path.resolve(
       "data",
-      req.headers.userFolder as string,
-      req.headers.fileName as string
+      req.get("userFolder") as string,
+      req.get("fileName") as string
     );
+
+    const stat = await fs.stat(filePath);
+    const fileSize = stat.size;
+    const fileMime = req.get("fileMime");
+
+    res.writeHead(200, {
+      "Content-Type": fileMime,
+      "Content-Length": fileSize,
+    });
+
     const stream = createReadStream(filePath);
     stream.pipe(res);
-    stream.on("end", () =>
-      res
-        .set({
-          "Content-Type": "image/png",
-          "Content-Length": stream.readableLength,
-        })
-        .send()
-    );
   } catch (error) {
     next(error);
   }
@@ -56,12 +58,12 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/", async (req, res, next) => {
   try {
-    const fileName = req.headers.fileName as string;
+    const fileName = req.get("fileName") as string;
     const filePath = path.resolve(
       "data",
-      req.headers.userFolder as string,
+      req.get("userFolder") as string,
       fileName
     );
     await fs.unlink(filePath);
